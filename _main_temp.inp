@@ -1,0 +1,56 @@
+*INCLUDE, INPUT=allinone.inp
+*INCLUDE, INPUT=add_amplitude.inp
+
+**line below make sense only with radiate BC
+
+*PHYSICAL CONSTANTS, ABSOLUTE ZERO=0, STEFAN BOLTZMANN=5.669E-8
+
+**line below make sense ony for trasient analysis
+*INITIAL CONDITIONS,TYPE=TEMPERATURE
+Nall,293.15
+
+*MATERIAL,NAME=aluminum
+*CONDUCTIVITY 
+1.6700E+02
+
+*SPECIFIC HEAT
+8.9600E+02
+
+*DENSITY
+2.7000E+03
+
+*SOLID SECTION,MATERIAL=aluminum,ELSET=heater
+
+*MATERIAL,NAME=bronze
+*CONDUCTIVITY 
+5.6000E+01
+
+*SPECIFIC HEAT
+3.8000E+02
+
+*DENSITY
+7.4000E+03
+
+*SOLID SECTION,MATERIAL=bronze,ELSET=cooling
+
+*INCLUDE, INPUT=add_contact.inp
+
+
+*STEP 
+*HEAT TRANSFER,STEADY STATE  
+
+*DFLUX
+heater,BF,5.0000E+06
+ 
+*FILM
+*INCLUDE, INPUT=convection.flm
+ 
+*NODE FILE 
+NT  
+*EL FILE 
+HFL
+*NODE PRINT,NSET=convection
+RFL
+*NODE PRINT,NSET=heater
+RFL
+*END STEP 

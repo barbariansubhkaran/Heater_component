@@ -1,0 +1,3 @@
+*TIE,NAME=T0,POSITION TOLERANCE=0
+slave_contact,master_contact
+
